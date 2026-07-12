@@ -1,6 +1,6 @@
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
-import Dashboard from "../pages/Dashboard";
+import Vehicles from "../pages/Vehicles";
 
 function MainLayout() {
   return (
@@ -19,9 +19,9 @@ function MainLayout() {
           <Navbar />
         </div>
 
-        {/* Dashboard */}
+        {/* Main Content */}
         <main className="flex-1 overflow-auto p-8 bg-[#050816]">
-          <Dashboard />
+          <Vehicles />
         </main>
 
       </div>
