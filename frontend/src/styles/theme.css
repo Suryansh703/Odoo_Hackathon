@@ -1,0 +1,31 @@
+:root {
+  /* Backgrounds */
+  --bg-primary: #050816;
+  --bg-secondary: #0b1120;
+  --bg-card: rgba(16, 23, 42, 0.7);
+
+  /* Neon */
+  --cyan: #22d3ee;
+  --purple: #8b5cf6;
+  --blue: #3b82f6;
+  --green: #10b981;
+  --orange: #f59e0b;
+  --red: #ef4444;
+
+  /* Text */
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+
+  /* Border */
+  --border: rgba(255, 255, 255, 0.08);
+
+  /* Shadows */
+  --shadow-cyan: 0 0 25px rgba(34, 211, 238, 0.25);
+  --shadow-purple: 0 0 25px rgba(139, 92, 246, 0.25);
+
+  /* Radius */
+  --radius: 22px;
+
+  /* Transition */
+  --transition: all 0.35s ease;
+}
