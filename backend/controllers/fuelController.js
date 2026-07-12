@@ -1,81 +1,140 @@
-// Get all fuel records
+const { FuelLog } = require("../models");
+
+// Get All Fuel Logs
 const getAllFuelRecords = async (req, res) => {
     try {
+
+        const fuelLogs = await FuelLog.find()
+            .populate("vehicle");
+
         res.status(200).json({
             success: true,
-            message: "Get all fuel records API is working"
+            count: fuelLogs.length,
+            data: fuelLogs
         });
+
     } catch (error) {
+
         res.status(500).json({
             success: false,
             message: error.message
         });
+
     }
 };
 
-// Get fuel record by ID
+// Get Fuel Log By ID
 const getFuelRecordById = async (req, res) => {
     try {
-        const { id } = req.params;
+
+        const fuelLog = await FuelLog.findById(req.params.id)
+            .populate("vehicle");
+
+        if (!fuelLog) {
+            return res.status(404).json({
+                success: false,
+                message: "Fuel record not found"
+            });
+        }
 
         res.status(200).json({
             success: true,
-            message: `Fuel record ID: ${id}`
+            data: fuelLog
         });
+
     } catch (error) {
+
         res.status(500).json({
             success: false,
             message: error.message
         });
+
     }
 };
 
-// Create fuel record
+// Create Fuel Log
 const createFuelRecord = async (req, res) => {
     try {
+
+        const fuelLog = await FuelLog.create(req.body);
+
         res.status(201).json({
             success: true,
-            message: "Fuel record created successfully"
+            message: "Fuel record created successfully",
+            data: fuelLog
         });
+
     } catch (error) {
-        res.status(500).json({
+
+        res.status(400).json({
             success: false,
             message: error.message
         });
+
     }
 };
 
-// Update fuel record
+// Update Fuel Log
 const updateFuelRecord = async (req, res) => {
     try {
-        const { id } = req.params;
+
+        const fuelLog = await FuelLog.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            {
+                new: true,
+                runValidators: true
+            }
+        );
+
+        if (!fuelLog) {
+            return res.status(404).json({
+                success: false,
+                message: "Fuel record not found"
+            });
+        }
 
         res.status(200).json({
             success: true,
-            message: `Fuel record ${id} updated successfully`
+            message: "Fuel record updated successfully",
+            data: fuelLog
         });
+
     } catch (error) {
-        res.status(500).json({
+
+        res.status(400).json({
             success: false,
             message: error.message
         });
+
     }
 };
 
-// Delete fuel record
+// Delete Fuel Log
 const deleteFuelRecord = async (req, res) => {
     try {
-        const { id } = req.params;
+
+        const fuelLog = await FuelLog.findByIdAndDelete(req.params.id);
+
+        if (!fuelLog) {
+            return res.status(404).json({
+                success: false,
+                message: "Fuel record not found"
+            });
+        }
 
         res.status(200).json({
             success: true,
-            message: `Fuel record ${id} deleted successfully`
+            message: "Fuel record deleted successfully"
         });
+
     } catch (error) {
+
         res.status(500).json({
             success: false,
             message: error.message
         });
+
     }
 };
 

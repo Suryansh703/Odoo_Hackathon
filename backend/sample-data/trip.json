@@ -1,0 +1,12 @@
+{
+  "source": "Kanpur",
+  "destination": "Lucknow",
+  "vehicle": "PUT_VEHICLE_ID_HERE",
+  "driver": "PUT_DRIVER_ID_HERE",
+  "cargoWeight": 450,
+  "plannedDistance": 95,
+  "actualDistance": 0,
+  "fuelConsumed": 0,
+  "finalOdometer": 0,
+  "status": "Draft"
+}

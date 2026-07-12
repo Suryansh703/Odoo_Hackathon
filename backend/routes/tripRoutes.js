@@ -23,5 +23,7 @@ router.put("/:id/cancel", tripController.cancelTrip);
 
 // Delete trip
 router.delete("/:id", tripController.deleteTrip);
+// Update trip
+router.put("/:id", tripController.updateTrip);
 
 module.exports = router;

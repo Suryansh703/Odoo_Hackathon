@@ -1,40 +1,45 @@
-const { Vehicle } = require("../models");
+const { Expense } = require("../models");
 
-// Get All Vehicles
-const getAllVehicles = async (req, res) => {
+// Get All Expenses
+const getAllExpenses = async (req, res) => {
     try {
-        const vehicles = await Vehicle.find();
+
+        const expenses = await Expense.find()
+            .populate("vehicle");
 
         res.status(200).json({
             success: true,
-            count: vehicles.length,
-            data: vehicles
+            count: expenses.length,
+            data: expenses
         });
 
     } catch (error) {
+
         res.status(500).json({
             success: false,
             message: error.message
         });
+
     }
 };
 
-// Get Vehicle By ID
-const getVehicleById = async (req, res) => {
+// Get Expense By ID
+const getExpenseById = async (req, res) => {
     try {
 
-        const vehicle = await Vehicle.findById(req.params.id);
+        const expense = await Expense.findById(req.params.id)
+            .populate("vehicle");
 
-        if (!vehicle) {
+        if (!expense) {
             return res.status(404).json({
                 success: false,
-                message: "Vehicle not found"
+                message: "Expense not found"
             });
         }
 
         res.status(200).json({
             success: true,
-            data: vehicle
+            data: expense
         });
 
     } catch (error) {
@@ -47,16 +52,16 @@ const getVehicleById = async (req, res) => {
     }
 };
 
-// Create Vehicle
-const createVehicle = async (req, res) => {
+// Create Expense
+const createExpense = async (req, res) => {
     try {
 
-        const vehicle = await Vehicle.create(req.body);
+        const expense = await Expense.create(req.body);
 
         res.status(201).json({
             success: true,
-            message: "Vehicle created successfully",
-            data: vehicle
+            message: "Expense created successfully",
+            data: expense
         });
 
     } catch (error) {
@@ -69,11 +74,11 @@ const createVehicle = async (req, res) => {
     }
 };
 
-// Update Vehicle
-const updateVehicle = async (req, res) => {
+// Update Expense
+const updateExpense = async (req, res) => {
     try {
 
-        const vehicle = await Vehicle.findByIdAndUpdate(
+        const expense = await Expense.findByIdAndUpdate(
             req.params.id,
             req.body,
             {
@@ -82,17 +87,17 @@ const updateVehicle = async (req, res) => {
             }
         );
 
-        if (!vehicle) {
+        if (!expense) {
             return res.status(404).json({
                 success: false,
-                message: "Vehicle not found"
+                message: "Expense not found"
             });
         }
 
         res.status(200).json({
             success: true,
-            message: "Vehicle updated successfully",
-            data: vehicle
+            message: "Expense updated successfully",
+            data: expense
         });
 
     } catch (error) {
@@ -105,22 +110,22 @@ const updateVehicle = async (req, res) => {
     }
 };
 
-// Delete Vehicle
-const deleteVehicle = async (req, res) => {
+// Delete Expense
+const deleteExpense = async (req, res) => {
     try {
 
-        const vehicle = await Vehicle.findByIdAndDelete(req.params.id);
+        const expense = await Expense.findByIdAndDelete(req.params.id);
 
-        if (!vehicle) {
+        if (!expense) {
             return res.status(404).json({
                 success: false,
-                message: "Vehicle not found"
+                message: "Expense not found"
             });
         }
 
         res.status(200).json({
             success: true,
-            message: "Vehicle deleted successfully"
+            message: "Expense deleted successfully"
         });
 
     } catch (error) {
@@ -134,9 +139,9 @@ const deleteVehicle = async (req, res) => {
 };
 
 module.exports = {
-    getAllVehicles,
-    getVehicleById,
-    createVehicle,
-    updateVehicle,
-    deleteVehicle
+    getAllExpenses,
+    getExpenseById,
+    createExpense,
+    updateExpense,
+    deleteExpense
 };

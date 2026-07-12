@@ -17,5 +17,6 @@ router.put("/:id/complete", maintenanceController.completeMaintenance);
 
 // Delete maintenance record
 router.delete("/:id", maintenanceController.deleteMaintenance);
-
+// Update maintenance
+router.put("/:id", maintenanceController.updateMaintenance);
 module.exports = router;
