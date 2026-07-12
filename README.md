@@ -286,8 +286,8 @@ This project was developed during the **Odoo Hackathon** by:
 
 | Name | Contribution |
 |------|--------------|
-| **Suryansh Shukla** | Backend Development, JWT Authentication, Role-Based Access Control (RBAC), REST API Development, MongoDB Integration, API Testing & Frontend Integration |
-| **Uditanshu** | Frontend Development, UI Components, API Integration & User Experience |
+| **Suryansh Shukla** | Backend Development, JWT Authentication, Role-Based Access Control (RBAC), MongoDB Integration,  Frontend Integration |
+| **Uditanshu** | Frontend Development, UI Components, REST API Development, API Testing &  User Experience |
 | **Unnati Gupta** | Frontend Development, UI/UX Design, Testing & Documentation |
 
 ---
