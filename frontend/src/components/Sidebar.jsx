@@ -1,8 +1,8 @@
 import {
-  FaChartBar,
+  FaChartPie,
   FaTruck,
   FaUsers,
-  FaRoad,
+  FaRoute,
   FaTools,
   FaGasPump,
 } from "react-icons/fa";
@@ -10,7 +10,7 @@ import {
 const menuItems = [
   {
     title: "Dashboard",
-    icon: <FaChartBar />,
+    icon: <FaChartPie />,
   },
   {
     title: "Fleet",
@@ -22,7 +22,7 @@ const menuItems = [
   },
   {
     title: "Trips",
-    icon: <FaRoad />,
+    icon: <FaRoute />,
   },
   {
     title: "Maintenance",
@@ -34,14 +34,14 @@ const menuItems = [
   },
 ];
 
-function Sidebar() {
+function Sidebar({ currentPage, setCurrentPage }) {
   return (
-    <div className="h-full flex flex-col bg-[#08101F] text-white">
+    <div className="h-full flex flex-col">
 
       {/* Logo */}
-      <div className="px-8 pt-8 pb-6 border-b border-cyan-500/20">
+      <div className="px-8 pt-8 pb-6">
 
-        <h1 className="text-4xl font-black tracking-wide">
+        <h1 className="text-4xl font-black tracking-wider">
           <span className="text-cyan-400">Transit</span>
           <span className="text-white">Ops</span>
         </h1>
@@ -53,43 +53,48 @@ function Sidebar() {
       </div>
 
       {/* Navigation */}
-      <div className="flex-1 px-4 py-6">
+      <div className="flex-1 px-5 mt-6">
 
-        {menuItems.map((item, index) => (
+        {menuItems.map((item) => (
+
           <button
-            key={index}
-            className="
+            key={item.title}
+            onClick={() => setCurrentPage(item.title)}
+            className={`
               group
               flex
               items-center
-              gap-4
+              gap-5
               w-full
               px-5
               py-4
               mb-3
               rounded-2xl
-              text-slate-300
-              hover:text-white
-              hover:bg-cyan-500/10
-              hover:border
-              hover:border-cyan-400/30
               transition-all
               duration-300
-            "
+              ${
+                currentPage === item.title
+                  ? "bg-cyan-500/20 border border-cyan-400 text-cyan-300"
+                  : "text-gray-400 hover:bg-cyan-500/10 hover:border hover:border-cyan-400/30 hover:text-cyan-300"
+              }
+            `}
           >
-            <span className="text-xl text-cyan-400">
+
+            <span className="text-xl transition-transform duration-300 group-hover:scale-110">
               {item.icon}
             </span>
 
-            <span className="font-medium">
+            <span className="font-medium tracking-wide">
               {item.title}
             </span>
+
           </button>
+
         ))}
 
       </div>
 
-      {/* Bottom Card */}
+      {/* Fleet Health Card */}
       <div className="p-5">
 
         <div
@@ -102,6 +107,7 @@ function Sidebar() {
             to-purple-500/10
             backdrop-blur-xl
             p-6
+            shadow-[0_0_30px_rgba(34,211,238,0.15)]
           "
         >
 
@@ -119,7 +125,7 @@ function Sidebar() {
 
           </div>
 
-          <p className="mt-4 text-xs text-slate-400">
+          <p className="mt-4 text-xs text-gray-400">
             All transport systems operational
           </p>
 
