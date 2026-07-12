@@ -1,0 +1,7 @@
+{
+  "vehicle": "PUT_VEHICLE_ID_HERE",
+  "expenseType": "Toll",
+  "amount": 550,
+  "description": "Lucknow Expressway Toll",
+  "date": "2026-07-12"
+}

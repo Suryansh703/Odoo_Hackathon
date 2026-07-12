@@ -1,0 +1,8 @@
+{
+  "vehicle": "PUT_VEHICLE_ID_HERE",
+  "title": "Engine Oil Change",
+  "description": "Routine engine oil replacement",
+  "cost": 3500,
+  "maintenanceDate": "2026-07-12",
+  "status": "Pending"
+}

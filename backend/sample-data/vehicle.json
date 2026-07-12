@@ -1,0 +1,9 @@
+{
+  "registrationNumber": "UP78AB1234",
+  "vehicleName": "Van-05",
+  "vehicleType": "Van",
+  "maxLoadCapacity": 500,
+  "odometer": 12000,
+  "acquisitionCost": 850000,
+  "status": "Available"
+}
