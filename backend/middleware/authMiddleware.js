@@ -1,5 +1,9 @@
 const authMiddleware = (req, res, next) => {
-    // Authentication logic can be added later (JWT, Sessions, etc.)
+    // Placeholder authentication
+    // Later, verify JWT or session here
+
+    console.log("Auth Middleware Executed");
+
     next();
 };
 
