@@ -1,51 +1,45 @@
-import { FaPlus, FaSearch } from "react-icons/fa";
-import VehicleTable from "../components/tables/VehicleTable";
+import CrudTable from "../components/tables/CrudTable";
+import {
+  getVehicles,
+  createVehicle,
+  updateVehicle,
+  deleteVehicle,
+} from "../services/vehicleService";
+
+const vehicleService = {
+  list: getVehicles,
+  create: createVehicle,
+  update: updateVehicle,
+  delete: deleteVehicle,
+};
+
+const fields = [
+  { name: "registrationNumber", label: "Registration", type: "text", required: true },
+  { name: "vehicleName", label: "Name", type: "text", required: true },
+  { name: "vehicleType", label: "Type", type: "text", required: true },
+  { name: "maxLoadCapacity", label: "Max Load", type: "number", required: true },
+  { name: "odometer", label: "Odometer", type: "number", required: false, default: 0 },
+  { name: "acquisitionCost", label: "Cost", type: "number", required: true },
+  {
+    name: "status",
+    label: "Status",
+    type: "select",
+    required: true,
+    default: "Available",
+    options: ["Available", "On Trip", "In Shop", "Retired"],
+  },
+];
 
 function Vehicles() {
   return (
     <div>
-
-      <div className="flex justify-between items-center mb-8">
-
-        <div>
-
-          <h1 className="text-4xl font-bold text-white">
-            Vehicle Management
-          </h1>
-
-          <p className="text-cyan-400 mt-2">
-            Manage your transport fleet efficiently
-          </p>
-
-        </div>
-
-        <button className="bg-cyan-500 hover:bg-cyan-400 transition px-6 py-3 rounded-xl font-semibold flex items-center gap-2">
-
-          <FaPlus />
-
-          Add Vehicle
-
-        </button>
-
-      </div>
-
-      <div className="mb-8">
-
-        <div className="flex items-center bg-white/5 border border-cyan-500/20 rounded-2xl h-14 px-5">
-
-          <FaSearch className="text-cyan-400 mr-3" />
-
-          <input
-            className="bg-transparent outline-none text-white w-full"
-            placeholder="Search vehicle..."
-          />
-
-        </div>
-
-      </div>
-
-      <VehicleTable />
-
+      <CrudTable
+        title="Vehicle Management"
+        description="Manage your transport fleet efficiently."
+        service={vehicleService}
+        fields={fields}
+        searchFields={["registrationNumber", "vehicleName", "vehicleType", "status"]}
+      />
     </div>
   );
 }

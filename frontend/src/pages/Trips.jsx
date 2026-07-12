@@ -1,52 +1,45 @@
-import { FaPlus, FaSearch } from "react-icons/fa";
-import TripTable from "../components/tables/TripTable";
+import CrudTable from "../components/tables/CrudTable";
+import {
+  getTrips,
+  createTrip,
+  updateTrip,
+  deleteTrip,
+} from "../services/tripService";
+
+const tripService = {
+  list: getTrips,
+  create: createTrip,
+  update: updateTrip,
+  delete: deleteTrip,
+};
+
+const fields = [
+  { name: "source", label: "Source", type: "text", required: true },
+  { name: "destination", label: "Destination", type: "text", required: true },
+  { name: "vehicle", label: "Vehicle", type: "text", required: true },
+  { name: "driver", label: "Driver", type: "text", required: true },
+  { name: "cargoWeight", label: "Cargo Weight", type: "number", required: true },
+  { name: "plannedDistance", label: "Planned Distance", type: "number", required: true },
+  {
+    name: "status",
+    label: "Status",
+    type: "select",
+    required: true,
+    default: "Draft",
+    options: ["Draft", "Dispatched", "Completed", "Cancelled"],
+  },
+];
 
 function Trips() {
   return (
     <div>
-
-      <div className="flex justify-between items-center mb-8">
-
-        <div>
-
-          <h1 className="text-4xl font-bold text-white">
-            Trip Management
-          </h1>
-
-          <p className="text-cyan-400 mt-2">
-            Monitor all transport trips
-          </p>
-
-        </div>
-
-        <button className="bg-cyan-500 hover:bg-cyan-400 px-6 py-3 rounded-xl flex items-center gap-2 font-semibold">
-
-          <FaPlus />
-
-          Add Trip
-
-        </button>
-
-      </div>
-
-      <div className="mb-8">
-
-        <div className="flex items-center bg-white/5 border border-cyan-500/20 rounded-2xl h-14 px-5">
-
-          <FaSearch className="text-cyan-400 mr-3" />
-
-          <input
-            type="text"
-            placeholder="Search Trip..."
-            className="bg-transparent outline-none text-white w-full"
-          />
-
-        </div>
-
-      </div>
-
-      <TripTable />
-
+      <CrudTable
+        title="Trip Management"
+        description="Monitor all transport trips."
+        service={tripService}
+        fields={fields}
+        searchFields={["source", "destination", "vehicle", "driver", "status"]}
+      />
     </div>
   );
 }

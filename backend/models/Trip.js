@@ -15,15 +15,15 @@ const tripSchema = new mongoose.Schema(
     },
 
     vehicle: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Vehicle",
+      type: String,
       required: true,
+      trim: true,
     },
 
     driver: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Driver",
+      type: String,
       required: true,
+      trim: true,
     },
 
     cargoWeight: {

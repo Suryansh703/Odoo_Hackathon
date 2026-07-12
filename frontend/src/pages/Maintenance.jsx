@@ -1,51 +1,44 @@
-import { FaPlus, FaSearch } from "react-icons/fa";
-import MaintenanceTable from "../components/tables/MaintenanceTable";
+import CrudTable from "../components/tables/CrudTable";
+import {
+  getMaintenance,
+  createMaintenance,
+  updateMaintenance,
+  deleteMaintenance,
+} from "../services/maintenanceService";
+
+const maintenanceService = {
+  list: getMaintenance,
+  create: createMaintenance,
+  update: updateMaintenance,
+  delete: deleteMaintenance,
+};
+
+const fields = [
+  { name: "vehicle", label: "Vehicle", type: "text", required: true },
+  { name: "title", label: "Service", type: "text", required: true },
+  { name: "description", label: "Description", type: "textarea", required: true },
+  { name: "cost", label: "Cost", type: "number", required: true },
+  { name: "maintenanceDate", label: "Date", type: "date", required: true },
+  {
+    name: "status",
+    label: "Status",
+    type: "select",
+    required: true,
+    default: "Pending",
+    options: ["Pending", "In Progress", "Completed"],
+  },
+];
 
 function Maintenance() {
   return (
     <div>
-
-      <div className="flex justify-between items-center mb-8">
-
-        <div>
-
-          <h1 className="text-4xl font-bold text-white">
-            Maintenance Management
-          </h1>
-
-          <p className="text-cyan-400 mt-2">
-            Track vehicle servicing
-          </p>
-
-        </div>
-
-        <button className="bg-cyan-500 hover:bg-cyan-400 px-6 py-3 rounded-xl flex gap-2 items-center">
-
-          <FaPlus />
-
-          Add Service
-
-        </button>
-
-      </div>
-
-      <div className="mb-8">
-
-        <div className="flex items-center bg-white/5 border border-cyan-500/20 rounded-2xl h-14 px-5">
-
-          <FaSearch className="text-cyan-400 mr-3" />
-
-          <input
-            placeholder="Search maintenance..."
-            className="bg-transparent outline-none text-white w-full"
-          />
-
-        </div>
-
-      </div>
-
-      <MaintenanceTable />
-
+      <CrudTable
+        title="Maintenance Management"
+        description="Track vehicle servicing."
+        service={maintenanceService}
+        fields={fields}
+        searchFields={["vehicle", "title", "status"]}
+      />
     </div>
   );
 }
