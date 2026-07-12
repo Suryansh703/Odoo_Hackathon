@@ -3,19 +3,37 @@ const router = express.Router();
 
 const vehicleController = require("../controllers/vehicleController");
 
+const authMiddleware = require("../middleware/authMiddleware");
+const authorize = require("../middleware/roleMiddleware");
+
 // Get all vehicles
-router.get("/", vehicleController.getAllVehicles);
+router.get("/", authMiddleware, vehicleController.getAllVehicles);
 
 // Get vehicle by ID
-router.get("/:id", vehicleController.getVehicleById);
+router.get("/:id", authMiddleware, vehicleController.getVehicleById);
 
 // Create vehicle
-router.post("/", vehicleController.createVehicle);
+router.post(
+    "/",
+    authMiddleware,
+    authorize("Admin", "Fleet Manager"),
+    vehicleController.createVehicle
+);
 
 // Update vehicle
-router.put("/:id", vehicleController.updateVehicle);
+router.put(
+    "/:id",
+    authMiddleware,
+    authorize("Admin", "Fleet Manager"),
+    vehicleController.updateVehicle
+);
 
 // Delete vehicle
-router.delete("/:id", vehicleController.deleteVehicle);
+router.delete(
+    "/:id",
+    authMiddleware,
+    authorize("Admin"),
+    vehicleController.deleteVehicle
+);
 
 module.exports = router;
